@@ -1,0 +1,22 @@
+server:
+  port: 9527
+spring: 
+  application: 
+    name: microservicecloud-zuul-gateway                       #应用名称
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: zuul-gateway-9527
+    prefer-ip-address: true
+zuul:
+  prefix: /horace           #统一前缀
+  ignored-services: "*"    #关闭真实service名访问通道
+  routes:
+    mydept.serviceId: microservicecloud-dept    #设置mydept的代理的服务名
+    mydept.path: /mydept/**                     #设置的代理名
+info: 
+  app.name: microservicecloud
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
